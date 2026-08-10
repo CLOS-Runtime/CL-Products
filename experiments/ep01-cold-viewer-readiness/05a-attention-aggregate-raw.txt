@@ -1,0 +1,84 @@
+maps parsed: [1, 2, 3, 4, 5, 6, 7]   missing: []
+  V1: 60 passages, 20 criteria, cadence=YES
+  V2: 60 passages, 20 criteria, cadence=YES
+  V3: 60 passages, 20 criteria, cadence=SOMEWHAT
+  V4: 60 passages, 20 criteria, cadence=YES
+  V5: 60 passages, 20 criteria, cadence=YES
+  V6: 60 passages, 20 criteria, cadence=SOMEWHAT
+  V7: 60 passages, 20 criteria, cadence=YES
+
+=== CONSENSUS ATTENTION MAP (frozen thresholds) ===
+P01  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P03  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P06  PULL(4/7)                                     raw: CARRY,PULL,PULL,CARRY,CARRY,PULL,PULL
+P07  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P09  FRICTION(6/7)                                 raw: FRICTION,FRICTION,CARRY,FRICTION,FRICTION,FRICTION,FRICTION
+P11  FRICTION(7/7)                                 raw: FRICTION,FRICTION,FRICTION,EXIT_RISK,FRICTION,FRICTION,FRICTION
+P12  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P14  PULL(6/7)                                     raw: PULL,PULL,PULL,PULL,PULL,CARRY,PULL
+P15  FRICTION(5/7)                                 raw: FRICTION,FRICTION,CARRY,FRICTION,FRICTION,CARRY,FRICTION
+P16  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P19  PULL(4/7)                                     raw: CARRY,CARRY,PULL,PULL,PULL,PULL,CARRY
+P20  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P22  PULL(6/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,CARRY
+P23  PULL(4/7)                                     raw: CARRY,PULL,PULL,CARRY,CARRY,PULL,PULL
+P25  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P26  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P27  FRICTION(3/7)                                 raw: FRICTION,PULL,PULL,FRICTION,PULL,CARRY,FRICTION
+P29  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P30  FRICTION(7/7)                                 raw: EXIT_RISK,FRICTION,FRICTION,FRICTION,FRICTION,FRICTION,FRICTION
+P33  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P35  FRICTION(5/7)                                 raw: CARRY,FRICTION,FRICTION,FRICTION,CARRY,EXIT_RISK,FRICTION
+P36  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P37  EXIT_RISK(2/7) FRICTION(3/7)                  raw: FRICTION,EXIT_RISK,CARRY,CARRY,CARRY,CARRY,EXIT_RISK
+P39  FRICTION(3/7)                                 raw: FRICTION,CARRY,FRICTION,CARRY,FRICTION,CARRY,CARRY
+P40  EXIT_RISK(4/7) FRICTION(6/7)                  raw: EXIT_RISK,FRICTION,PULL,EXIT_RISK,EXIT_RISK,FRICTION,EXIT_RISK
+P41  PULL(5/7)                                     raw: PULL,PULL,PULL,PULL,PULL,CARRY,CARRY
+P42  PULL(6/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,CARRY
+P45  PULL(6/7)                                     raw: PULL,PULL,PULL,PULL,CARRY,PULL,PULL
+P47  PULL(4/7)                                     raw: PULL,CARRY,PULL,FRICTION,PULL,CARRY,PULL
+P48  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P51  EXIT_RISK(2/7)                                raw: PULL,EXIT_RISK,EXIT_RISK,CARRY,CARRY,CARRY,PULL
+P52  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P54  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+P57  PULL(5/7)                                     raw: PULL,PULL,CARRY,PULL,PULL,PULL,CARRY
+P60  PULL(7/7)                                     raw: PULL,PULL,PULL,PULL,PULL,PULL,PULL
+
+--- sub-threshold but notable (2 friction, or 1 exit-risk) ---
+P24  friction=1 exit=1
+P44  friction=2 exit=0
+P49  friction=1 exit=1
+P50  friction=2 exit=0
+P53  friction=2 exit=0
+
+=== CRITERION MEDIANS ===
+C01: median=STRONG    [S7]
+C02: median=STRONG    [S7]
+C03: median=STRONG    [S7]
+C04: median=STRONG    [S6 A1]
+C05: median=ADEQUATE  [S2 A5]
+C06: median=ADEQUATE  [A6 W1]
+C07: median=STRONG    [S6 A1]
+C08: median=ADEQUATE  [A7]
+C09: median=STRONG    [S7]
+C10: median=ADEQUATE  [A5 W2]
+C11: median=WEAK      [W7]
+C12: median=ADEQUATE  [A7]
+C13: median=STRONG    [S7]
+C14: median=ADEQUATE  [A7]
+C15: median=STRONG    [S4 A3]
+C16: median=ADEQUATE  [S2 A5]
+C17: median=ADEQUATE  [S2 A5]
+C18: median=STRONG    [S6 A1]
+C19: median=STRONG    [S4 A3]
+C20: median=ADEQUATE  [A7]
+
+=== CADENCE PROBE ===
+  V1: YES
+  V2: YES
+  V3: SOMEWHAT
+  V4: YES
+  V5: YES
+  V6: SOMEWHAT
+  V7: YES
+  tally: {'YES': 5, 'SOMEWHAT': 2, 'NO': 0}
