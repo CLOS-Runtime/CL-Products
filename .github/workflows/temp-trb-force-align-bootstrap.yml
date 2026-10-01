@@ -11,13 +11,13 @@ jobs:
     steps:
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
-      - name: Build verified public bootstrap
+          python-version: '3.11'
+      - name: Build exact ecb30446 Python environment
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
-          python -m pip install huggingface_hub
           mkdir -p stage/model stage/python
+          python -m pip install huggingface_hub==0.34.4
           python - <<'PY'
           from huggingface_hub import snapshot_download
           from pathlib import Path
@@ -25,20 +25,31 @@ jobs:
           dest=Path('stage/model')
           snapshot_download(repo_id='facebook/wav2vec2-base-960h',revision='22aad52',local_dir=str(dest),allow_patterns=['config.json','preprocessor_config.json','feature_extractor_config.json','tokenizer_config.json','special_tokens_map.json','vocab.json','model.safetensors'])
           p=dest/'model.safetensors'; h=hashlib.sha256(p.read_bytes()).hexdigest()
-          assert p.stat().st_size == 377607901, p.stat().st_size
-          assert h == '8aa76ab2243c81747a1f832954586bc566090c83a0ac167df6f31f0fa917d74a', h
+          assert p.stat().st_size == 377607901
+          assert h == '8aa76ab2243c81747a1f832954586bc566090c83a0ac167df6f31f0fa917d74a'
           print('MODEL_IDENTITY_PASS',p.stat().st_size,h)
           PY
-          python -m pip install --target stage/python 'transformers==4.56.2' 'safetensors'
+          python -m pip install --target stage/python --index-url https://download.pytorch.org/whl/cpu 'torch==2.8.0'
+          python -m pip install --target stage/python 'transformers==4.56.2' 'huggingface-hub==0.34.4' 'safetensors==0.6.2' 'numpy==2.2.6' 'fastapi==0.116.1' 'uvicorn==0.35.0' 'python-multipart==0.0.20'
+          PYTHONPATH=stage/python python - <<'PY'
+          import sys,torch,transformers,huggingface_hub,safetensors,numpy
+          assert sys.version_info[:2] == (3,11)
+          assert torch.__version__.startswith('2.8.0')
+          assert transformers.__version__ == '4.56.2'
+          assert huggingface_hub.__version__ == '0.34.4'
+          assert safetensors.__version__ == '0.6.2'
+          assert numpy.__version__ == '2.2.6'
+          print('ENV_IDENTITY_PASS',sys.version.split()[0],torch.__version__,transformers.__version__,huggingface_hub.__version__,safetensors.__version__,numpy.__version__)
+          PY
           tar -C stage/model -czf trb-force-align-model-22aad52.tar.gz .
-          tar -C stage/python -czf trb-force-align-python313-transformers4562.tar.gz .
+          tar -C stage/python -czf trb-force-align-python311-ecb30446.tar.gz .
           sha256sum trb-force-align-*.tar.gz > bootstrap.sha256
       - uses: actions/upload-artifact@v4
         with:
-          name: trb-force-align-bootstrap-ecb30446
+          name: trb-force-align-bootstrap-ecb30446-py311
           path: |
             trb-force-align-model-22aad52.tar.gz
-            trb-force-align-python313-transformers4562.tar.gz
+            trb-force-align-python311-ecb30446.tar.gz
             bootstrap.sha256
           compression-level: 0
           retention-days: 1
