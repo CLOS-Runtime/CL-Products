@@ -1,0 +1,38 @@
+name: TRB Gas Stations pinned wav2vec2 bootstrap
+on:
+  push:
+    paths:
+      - '.github/workflows/trb-gas-stations-model-bootstrap-20261010.yml'
+  workflow_dispatch:
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch and verify immutable Meta weights
+        run: |
+          python -m pip install 'huggingface_hub==0.36.0'
+          python - <<'PY'
+          from huggingface_hub import snapshot_download
+          import hashlib, pathlib, shutil
+          p=pathlib.Path(snapshot_download('facebook/wav2vec2-base-960h',revision='22aad52',allow_patterns=['config.json','preprocessor_config.json','tokenizer_config.json','vocab.json','special_tokens_map.json','model.safetensors']))
+          dst=pathlib.Path('model_bundle');dst.mkdir()
+          for f in p.iterdir():
+              if f.is_file(): shutil.copy2(f,dst/f.name)
+          w=dst/'model.safetensors'
+          assert w.stat().st_size==377607901,w.stat().st_size
+          assert hashlib.sha256(w.read_bytes()).hexdigest()=='8aa76ab2243c81747a1f832954586bc566090c83a0ac167df6f31f0fa917d74a'
+          print('PINNED_MODEL_HASH_PASS')
+          PY
+          tar -czf trb-gas-wav2vec2-22aad52.tar.gz model_bundle
+          sha256sum trb-gas-wav2vec2-22aad52.tar.gz > bootstrap.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trb-gas-wav2vec2-22aad52-20261010
+          path: |
+            trb-gas-wav2vec2-22aad52.tar.gz
+            bootstrap.sha256
+          compression-level: 0
+          retention-days: 7
