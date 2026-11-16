@@ -36,3 +36,4 @@ jobs:
             bootstrap.sha256
           compression-level: 0
           retention-days: 7
+# WT EP01 pinned-model recovery trigger 2026-11-16; no runtime or model changes.
